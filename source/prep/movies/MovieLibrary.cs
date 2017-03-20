@@ -74,13 +74,20 @@ namespace code.prep.movies
 
                 for (var j = 0; j < secondList.Count(); j++)
                 {
-                    var nextElement = secondList.ElementAt(j);
+                    var firstElement = firstList.ElementAt(j);
+                    var nextElement = secondList.ElementAt(j+1);
 
-                    if (!sortFunc(elementToInsert, nextElement))
+                    if (!sortFunc(elementToInsert, firstElement))
                     {
                         // Element should be inserted between j and j + 1
-                        secondList.Insert(j + 1, elementToInsert);
+                        secondList.Insert(j, elementToInsert);
+                        break;
                     }
+//
+//                    if (!sortFunc(elementToInsert, nextElement))
+//                    {
+//                        secondList.Insert();
+//                    }
                 }
             }
 
