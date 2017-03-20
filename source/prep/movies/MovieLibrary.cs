@@ -57,14 +57,34 @@ namespace code.prep.movies
             var rightPortion = GetElementsFrom(movies, midIndex + 1, numberOfMovies - 1);
 
           var leftMerged = MergeSort(leftPortion, sortFunc);
-          var rightMerged = MergeSort(rightPortion, sortFunc);
+          var rightMerged = MergeSort(rightPortion, sortFunc).ToList();
 
           return MergeTogether(leftMerged, rightMerged, sortFunc);
       }
 
-      private IEnumerable<Movie> MergeTogether(IEnumerable<Movie> firstList, IEnumerable<Movie> secondList, Func<Movie, Movie, bool> sortFunc)
+      private IEnumerable<Movie> MergeTogether(IEnumerable<Movie> firstList, IList<Movie> secondList, Func<Movie, Movie, bool> sortFunc)
       {
-          return new List<Movie>();
+            // For each element in the first list
+            // Determine the position where moving it one over would result in the sort function to return false
+            // Shift all elements in right one and insert the left element there
+
+          for (var i = 0; i < firstList.Count(); i++)
+          {
+              var elementToInsert = firstList.ElementAt(i);
+
+                for (var j = 0; j < secondList.Count(); j++)
+                {
+                    var nextElement = secondList.ElementAt(j);
+
+                    if (!sortFunc(elementToInsert, nextElement))
+                    {
+                        // Element should be inserted between j and j + 1
+                        secondList.Insert(j + 1, elementToInsert);
+                    }
+                }
+            }
+
+          return secondList;
       }
 
       private IEnumerable<Movie> GetElementsFrom(IEnumerable<Movie> movies, int lo, int hi)
