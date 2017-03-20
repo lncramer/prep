@@ -4,12 +4,12 @@
   {
     public static IMatchA<Element> or<Element>(this IMatchA<Element> left, IMatchA<Element> right)
     {
-      return new OrMatch<Element>(left, right);
+      return new BinaryMatch<Element>(left, right, (a, b) => );
     }
 
 	  public static IMatchA<Element> and<Element>(this IMatchA<Element> left, IMatchA<Element> right)
 	  {
-		  return new AndMatch<Element>(left, right);
+		  return new BinaryMatch<Element>(left, right, (a, b) => );
 	  }
 
     public static IMatchA<Element> not<Element>(this IMatchA<Element> to_negate)
