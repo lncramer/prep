@@ -136,7 +136,7 @@ namespace code.prep.movies
 
     public IEnumerable<Movie> sort_all_movies_by_title_descending()
     {
-      throw new NotImplementedException();
+        return SortBy((movie1, movie2) => movie1.title[0] < movie2.title[0]);
     }
 
     public IEnumerable<Movie> sort_all_movies_by_title_ascending()
