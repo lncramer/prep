@@ -42,7 +42,8 @@ namespace code.prep.movies
     public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
     {
         return
-            movies.filter_using(new OrMatch<Movie>(new IsPublishedBy(ProductionStudio.Pixar),
+            movies.filter_using(new OrMatch<Movie>(
+                new IsPublishedBy(ProductionStudio.Pixar),
                 new IsPublishedBy(ProductionStudio.Disney)));
     }
 
@@ -54,7 +55,6 @@ namespace code.prep.movies
     public IEnumerable<Movie> all_movies_published_after(int year)
     {
         return movies.filter_using(new IsDatePublished(year, DateComparer.After));
-//        return movies.filter_using( movie => movie.date_published.Year > year);
     }
 
     public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
@@ -62,7 +62,6 @@ namespace code.prep.movies
         return
             movies.filter_using(new OrMatch<Movie>(new IsDatePublished(startingYear, DateComparer.OnOrAfter),
                 new IsDatePublished(endingYear, DateComparer.OnOrBefore)));
-//        return movies.filter_using( movie => movie.date_published.Year >= startingYear && movie.date_published.Year <= endingYear);
     }
 
     public IEnumerable<Movie> all_kid_movies()
