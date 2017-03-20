@@ -40,15 +40,43 @@ namespace code.prep.movies
 
       private IEnumerable<Movie> SortBy(Func<Movie, Movie, bool> sortFunc)
       {
-          var allMovies = all_movies();
+          return MergeSort(all_movies(), sortFunc);
+      }
 
-          if (allMovies.Count() == 1)
+      private IEnumerable<Movie> MergeSort(IEnumerable<Movie> movies, Func<Movie, Movie, bool> sortFunc)
+      {
+            var numberOfMovies = movies.Count();
+
+            if (numberOfMovies == 1)
+            {
+                return movies;
+            }
+
+            var midIndex = numberOfMovies / 2;
+            var leftPortion = GetElementsFrom(movies, 0, midIndex);
+            var rightPortion = GetElementsFrom(movies, midIndex + 1, numberOfMovies - 1);
+
+          var leftMerged = MergeSort(leftPortion, sortFunc);
+          var rightMerged = MergeSort(rightPortion, sortFunc);
+
+          return MergeTogether(leftMerged, rightMerged, sortFunc);
+      }
+
+      private IEnumerable<Movie> MergeTogether(IEnumerable<Movie> firstList, IEnumerable<Movie> secondList, Func<Movie, Movie, bool> sortFunc)
+      {
+          return new List<Movie>();
+      }
+
+      private IEnumerable<Movie> GetElementsFrom(IEnumerable<Movie> movies, int lo, int hi)
+      {
+          var resultSet = new List<Movie>();
+
+          for (var i = lo; i <= hi; i++)
           {
-              return allMovies;
-          }
+                resultSet.Add(movies.ElementAt(i));
+            }
 
-          var midIndex = allMovies.Count()/2;
-            var midElement = 
+          return resultSet;
       }
 
       public IEnumerable<Movie> all_movies_published_by_pixar()
