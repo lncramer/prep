@@ -53,8 +53,8 @@ namespace code.prep.movies
             }
 
             var midIndex = numberOfMovies / 2;
-            var leftPortion = GetElementsFrom(movies, 0, midIndex);
-            var rightPortion = GetElementsFrom(movies, midIndex + 1, numberOfMovies - 1);
+            var leftPortion = GetElementsFrom(movies, 0, midIndex - 1);
+            var rightPortion = GetElementsFrom(movies, midIndex, numberOfMovies - 1);
 
           var leftMerged = MergeSort(leftPortion, sortFunc);
           var rightMerged = MergeSort(rightPortion, sortFunc).ToList();
