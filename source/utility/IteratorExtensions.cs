@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using code.utility.filtering;
 using code.utility.matching;
 
 namespace code.utility
@@ -38,7 +39,24 @@ namespace code.utility
 
       return result;
     }
+
+    public static IProvideAccessToMatchBuilders<Value, Element> filter<Value, Element>(this IEnumerable<Value> items,
+        IGetTheValueOfAProperty<Value, Element> propertyAccessor)
+    {
+//        return new FilterExtensionPoint<Value, Element>(Match<Value>.with_attribute(propertyAccessor));
+        return new FilterExtensionPoint<Value, Element>(items, propertyAccessor);
+    }
   }
 
-  public delegate Element ElementAccumulator<Element, Value>(Element accumulator, Value stepValue);
+//    public class FilterExtensionPoint<ObjectType, PropertyType> : IProvideAccessToMatchBuilders<ObjectType, PropertyType>
+//    {
+//        private IProvideAccessToMatchBuilders<ObjectType, PropertyType> _matchBuilder;
+//
+//        public FilterExtensionPoint(IProvideAccessToMatchBuilders<ObjectType, PropertyType> matchBuilder)
+//        {
+//            _matchBuilder = matchBuilder;
+//        }
+//    }
+
+    public delegate Element ElementAccumulator<Element, Value>(Element accumulator, Value stepValue);
 }

@@ -204,7 +204,9 @@ namespace code.prep.movies
 
       It finds_all_movies_published_by_pixar_or_disney = () =>
       {
-        var results = sut.all().filter(x => x.production_studio).equal_to_any(ProductionStudio.Pixar, ProductionStudio.Disney));
+          // Building up a list of criteria on the filter
+          // Can it override ToList and then evaluate its criteria?
+        var results = sut.all().filter(x => x.production_studio).equal_to_any(ProductionStudio.Pixar, ProductionStudio.Disney);
 
         results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
       };
