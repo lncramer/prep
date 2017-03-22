@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using code.prep.people;
 using code.web.features.list_people;
 
@@ -27,6 +28,16 @@ namespace code.web.stubs
     {
       return new StubResponseEngine();
     }
+
+      public static string data_formatter(IEnumerable<Person> data)
+      {
+          return "wow";
+      }
+
+      public static void response_sender(string data)
+      {
+          HttpContext.Current.Response.Write(data);
+      }
   }
 
   public class StubResponseEngine : ISendResponsesToTheClient
